@@ -28,9 +28,9 @@ input {
 
 .button {
   cursor: pointer;
-  width: 90px;
+  width: 31px;
   height: 31px;
-  border-radius: 0px;
+  border-radius: 50%;
   border: 1px solid grey;
 
 }

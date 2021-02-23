@@ -55,6 +55,7 @@ function appendPaymentTable(curPayment) {
   appendTd(newTr, '$' + curPayment.billAmt);
   appendTd(newTr, '$' + curPayment.tipAmt);
   appendTd(newTr, curPayment.tipPercent + '%');
+  appendTdButton(newTr, "&#88;");
 
   paymentTbody.append(newTr);
 }
@@ -74,5 +75,26 @@ function updateSummary() {
   summaryTds[0].innerHTML = '$' + sumPaymentTotal('billAmt');
   summaryTds[1].innerHTML = '$' + sumPaymentTotal('tipAmt');
   summaryTds[2].innerHTML =  Math.round(tipPercentAvg) + '%';
+}
+
+//Step 3-------------payment removal button---------------
+paymentTbody.addEventListener("click", billDeleteButton);
+
+function billDeleteButton(event) {
+  event.preventDefault();
+  
+  if(event.target.tagName === 'BUTTON'){
+    checkTotal = event.target.parentElement.children[0].innerText;
+    checkTipAmount = event.target.parentElement.children[1].innerText;
+    for(let check in allPayments){
+      if("$" + allPayments.payment1.billAmt === checkTotal){
+        if("$" + allPayments[check].tipAmt === checkTipAmount)
+        delete allPayments[check];
+      }
+    event.target.parentElement.remove();
+    updateServerTable();
+    updateSummary();
+    }
+  }
 }
 
