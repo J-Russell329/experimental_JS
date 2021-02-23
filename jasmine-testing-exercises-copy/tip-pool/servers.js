@@ -38,6 +38,7 @@ function updateServerTable() {
 
     appendTd(newTr, curServer.serverName);
     appendTd(newTr, '$' + tipAverage.toFixed(2));
+    appendTdButton(newTr, "&#88;");
 
     serverTbody.append(newTr);
   }
@@ -46,3 +47,21 @@ function updateServerTable() {
 
 
 //Step 3-------------server removal button---------------
+serverTbody.addEventListener("click", serverDeleteButton);
+
+function serverDeleteButton(event) {
+  event.preventDefault();
+  
+  if(event.target.tagName === 'BUTTON'){
+    _serverName = event.target.parentElement.children[0].innerText;
+    for(let index in allServers){
+      console.log(_serverName);
+      console.log(index);
+      console.log(allServers.index)
+      if(allServers.index.serverName === _serverName){
+        delete allServers.index;
+      }
+    event.target.parentElement.remove();
+    }
+  }
+}

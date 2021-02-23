@@ -24,3 +24,13 @@ function appendTd(tr, value) {
 
   tr.append(newTd);
 }
+
+function appendTdButton(tr, value) {
+  let newTd = document.createElement('button');
+  newTd.classList.add("button");
+  newTd.innerHTML = value;
+
+  tr.append(newTd);
+}
+
+

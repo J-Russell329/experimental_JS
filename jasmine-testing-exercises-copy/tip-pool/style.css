@@ -26,6 +26,15 @@ input {
   padding: 6px;
 }
 
+.button {
+  cursor: pointer;
+  width: 90px;
+  height: 31px;
+  border-radius: 0px;
+  border: 1px solid grey;
+
+}
+
 button {
   cursor: pointer;
   width: 90px;
@@ -54,3 +63,4 @@ table {
 .deleteBtn {
   cursor: pointer;
 }
+
