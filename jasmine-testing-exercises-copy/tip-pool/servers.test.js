@@ -1,4 +1,4 @@
-describe("Servers test (with setup and tear-down)", function() {
+ describe("Servers test (with setup and tear-down)", function() {
   beforeAll(function () {
     // initialization logic
     serverNameInput.value = 'Alice';
