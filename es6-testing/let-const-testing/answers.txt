@@ -1,0 +1,15 @@
+What is the difference between var and let?
+	var allows for redeclerations
+	var is tied to the function instead of block scopeing
+	var is tied to the window
+	var is hoisted diffrent. meaning that logging var before it is declared in .js will return undefined. let, will return an error
+What is the difference between var and const?
+	var allows for redeclerations and reassignment. const does neither 
+	var is tied to the function instead of block scopeing
+	var is tied to the window
+	var is hoisted diffrent. meaning that logging var before it is declared in .js will return undefined. const, will return an error
+	const cannot be assinged without an initalizer.
+What is the difference between let and const?
+	mainly the ablity to be reassigned
+What is hoisting?
+	the way that a variable is initalized by the browser
