@@ -35,9 +35,7 @@ function hasNoDuplicates(arr){
 // -------------hasCertainkey------------??????????? key in val
 function hasCertainKey(arr,objectKey){
     return arr.every(function(object){
-        try{
-            return object[objectKey] !== undefined;
-        } catch{}
+        return object[objectKey] !== undefined;
     })
 }
 // function hasCertainKey(arr, key){
