@@ -37,30 +37,32 @@ selectorScreen.addEventListener("click", function(event){
 
 //-------------Restart Button-------------------------
 
-function reset() {
+function reset(player) {
+      location.reload();
+
   selectorScreen.classList.toggle("hideme");
   boardSize = [];
   boardValues= [];
+  player1.clear();
+  player2.clear();
+  player = 0;
   gameBoard.children[0].innerHTML = "";
+  // console.log(player)
+  document.querySelector("#nextplayer").classList.remove("player2")
+  document.querySelector("#nextplayer").classList.add("player1")
 
 }
 const restartButton = document.querySelector("#restartbutton");
 restartButton.addEventListener("click",function(event){
   event.preventDefault();
-  
+  location.reload();
+
   reset()
 })
 
 //---------------board values-----------------
 
-let boardValues = [
-  // [null,null,null,null,null,null,null],
-  // [null,null,null,null,null,null,null],
-  // [null,null,null,null,null,null,null],
-  // [null,null,null,null,null,null,null],
-  // [null,null,null,null,null,null,null],
-  // [null,null,null,null,null,null,null],
-  ]
+let boardValues = [];
 
 function createBackgroundBoard([height,width]){
   for(let number =0; number < height;number++){
@@ -112,7 +114,12 @@ function createBoard(height,width) {
   selectorScreen.classList.toggle("hideme");
   createBackgroundBoard(boardSize)
   createHTMLBoard(boardSize)
-  scriptCreator("connect4-main.js")
+  if(document.querySelectorAll("script")[1] === undefined){
+    scriptCreator("connect4-main.js")
+    
+  } else{
+}
+  
 }
 
 

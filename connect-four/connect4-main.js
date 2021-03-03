@@ -1,3 +1,7 @@
+//-------------start script----------------
+  let player1 = new Set();
+  let player2 = new Set();
+
 //-------column finder---------
 function columnFinder(number){
   columnNumberids = [];
@@ -16,57 +20,80 @@ function playerSwitch() {
 function whichPlayer() {
   return player % 2;
 }
-let player1 = new Set();
-let player2 = new Set();;
+
 
 //----------------win Conditions--------
+function win(player){
+  alert(player +" wins");
+  reset(player);
+}
+function winPlayer1(array) {
+  return array.every(function(number){
+     return player1.has(number);
+  })
+}
+
+function winPlayer2(array) {
+  return array.every(function(number){
+     return player2.has(number);
+  })
+
+}
 function winCondition(number,player){
   // const columnNumberid = number%10;
   // const rowNumberid = Math.floor(number /10);
   switch(player){
   case 0:
-    console.log("player1")
     let tempArray = Array.from(document.querySelectorAll(".player1"));
     tempArray.pop();
     tempArray = tempArray.map(function(values){return Number(values.id)})
 
-    for(let i =0; i< 4 ;i++){
-      const _number = number-i;
-      const horiz = [[player1.has(_number)],[player1.has(_number+1)],[player1.has(_number+2)],[player1.has(_number+3)]]
-      console.log(horiz)
-      if(horiz.every(function(number){
-        return player1.has(number)
-      })) {
-        win("player1")
-      }
+    if(player1.size>3){
+      for(let i =0; i< 4 ;i++){
+        const horizontalNumber = number-i;
+        const diagnalNumUp = number-i-(i*10);
+        const diagnalNumDown = number+(i*10)-i;
+        const verticalNum = number-(i*10);
+        const horiz = [horizontalNumber,horizontalNumber+1,horizontalNumber+2,horizontalNumber+3];
+        const diagnallUp = [diagnalNumUp,diagnalNumUp+11,diagnalNumUp+22,diagnalNumUp+33];
+        const diagnalDown = [diagnalNumDown,diagnalNumDown-9,diagnalNumDown-18,diagnalNumDown-27];
+        const vertical = [verticalNum,verticalNum+10,verticalNum+20,verticalNum+30]
+        if(winPlayer1(horiz) || winPlayer1(diagnallUp) || winPlayer1(diagnalDown)|| winPlayer1(vertical)){
+          win("player1");
+        } else if(player === (boardSize[0]*boardSize[1])){
+          alert("Game Over! Tie");
+          reset();
+        }
+      } 
     }
+    
   
     break;
   case 1:
-    console.log("player2")
+    let tempArray1 = Array.from(document.querySelectorAll(".player2"));
+    tempArray1.pop();
+    tempArray1 = tempArray1.map(function(values){return Number(values.id)})
+
+    if(player2.size>3){
+      for(let i =0; i< 4 ;i++){
+        const horizontalNumber = number-i;
+        const diagnalNumUp = number-i-(i*10);
+        const diagnalNumDown = number+(i*10)-i;
+        const verticalNum = number-(i*10);
+        const horiz = [horizontalNumber,horizontalNumber+1,horizontalNumber+2,horizontalNumber+3];
+        const diagnallUp = [diagnalNumUp,diagnalNumUp+11,diagnalNumUp+22,diagnalNumUp+33];
+        const diagnalDown = [diagnalNumDown,diagnalNumDown-9,diagnalNumDown-18,diagnalNumDown-27];
+        const vertical = [verticalNum,verticalNum+10,verticalNum+20,verticalNum+30]
+        if(winPlayer2(horiz) || winPlayer2(diagnallUp) || winPlayer2(diagnalDown)|| winPlayer2(vertical)){
+          win("player2");
+        } else if(player === (boardSize[0]*boardSize[1])){
+          alert("Game Over! Tie");
+          reset();
+        }
+      } 
+    }
+
     break;
-  }
-  
-  function win(player){
-    alert(player +" wins")
-  }
-
-
-  // for (var y = 0; y < HEIGHT; y++) {
-  //   for (var x = 0; x < WIDTH; x++) {
-  //     var horiz = [[y, x], [y, x + 1], [y, x + 2], [y, x + 3]];
-  //     var vert = [[y, x], [y + 1, x], [y + 2, x], [y + 3, x]];
-  //     var diagDR = [[y, x], [y + 1, x + 1], [y + 2, x + 2], [y + 3, x + 3]];
-  //     var diagDL = [[y, x], [y + 1, x - 1], [y + 2, x - 2], [y + 3, x - 3]];
-
-  //     if (_win(horiz) || _win(vert) || _win(diagDR) || _win(diagDL)) {
-  //       return true;
-  //     }
-  //   }
-  // }
-  if(player === (boardSize[0]*boardSize[1])){
-    alert("Game Over! Tie");
-    reset();
   }
 }
 
