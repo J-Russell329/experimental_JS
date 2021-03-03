@@ -12,116 +12,111 @@
 
 */
 
-const gameBoard = document.querySelector("#board");
+
+const gameBoard = document.querySelector('#board');
 //------------selector(load) screen-------------------
 let boardSize = [];
-const selectorScreen = document.querySelector("#loadscreen");
-selectorScreen.addEventListener("click", function(event){
-  if(event.target.tagName === "BUTTON"){
-    switch(event.target.id){
-      case "normalsize":
-        // id = "normalsize"
-        createBoard(6,7);
-        break;
-      case "largesize":
-        // id = "largesize"
-        createBoard(7,8);
-        break;
-      case "extralarge":
-        // id = "extralarge"
-        createBoard(8,9);
-        break;
-    }
-  }
-})
+const selectorScreen = document.querySelector('#loadscreen');
+selectorScreen.addEventListener('click', function (event) {
+	if (event.target.tagName === 'BUTTON') {
+		switch (event.target.id) {
+			case 'normalsize':
+				// id = "normalsize"
+				createBoard(6, 7);
+				break;
+			case 'largesize':
+				// id = "largesize"
+				createBoard(7, 8);
+				break;
+			case 'extralarge':
+				// id = "extralarge"
+				createBoard(8, 9);
+				break;
+		}
+	}
+});
 
 //-------------Restart Button-------------------------
 
 function reset(player) {
-      location.reload();
 
-  selectorScreen.classList.toggle("hideme");
-  boardSize = [];
-  boardValues= [];
-  player1.clear();
-  player2.clear();
-  player = 0;
-  gameBoard.children[0].innerHTML = "";
-  // console.log(player)
-  document.querySelector("#nextplayer").classList.remove("player2")
-  document.querySelector("#nextplayer").classList.add("player1")
+	location.reload();
 
+	selectorScreen.classList.toggle('hideme');
+	boardSize = [];
+	boardValues = [];
+	player1.clear();
+	player2.clear();
+	player = 0;
+	gameBoard.children[0].innerHTML = '';
+	// console.log(player)
+	document.querySelector('#nextplayer').classList.remove('player2');
+	document.querySelector('#nextplayer').classList.add('player1');
 }
-const restartButton = document.querySelector("#restartbutton");
-restartButton.addEventListener("click",function(event){
-  event.preventDefault();
-  location.reload();
+const restartButton = document.querySelector('#restartbutton');
+restartButton.addEventListener('click', function (event) {
+	event.preventDefault();
+	// location.reload();
 
-  reset()
-})
+	reset();
+});
 
 //---------------board values-----------------
 
 let boardValues = [];
 
-function createBackgroundBoard([height,width]){
-  for(let number =0; number < height;number++){
-    const tempRow = [];
-    for(let number =0; number < width;number++){
-      tempRow.push(null);
-    }
-    boardValues.push(tempRow)
-  } 
+
+function createBackgroundBoard([height, width]) {
+	for (let number = 0; number < height; number++) {
+		const tempRow = [];
+		for (let number = 0; number < width; number++) {
+			tempRow.push(null);
+		}
+		boardValues.push(tempRow);
+	}
 }
 
-function createHTMLBoard([height,width]){
-  const tableHeadRow = document.createElement("tr");
-  tableHeadRow.id = "head"
-  tableHeadRow.classList.add("piece")
-  let theadCounter = (height+1)*10;
-  for(let number =0; number < width;number++){
-    const innerTD = document.createElement('td');
-    innerTD.id = theadCounter;
-    theadCounter++;
-    tableHeadRow.appendChild(innerTD);
-  }
-  gameBoard.children[0].appendChild(tableHeadRow);
-  let reverseCounter = height;
-  for(let number =0; number < height;number++){
-    let tbodyCounter = ((reverseCounter)*10);
-    reverseCounter--;
-    const tableBodyRow = document.createElement("tr");
-      for(let number =0; number < width;number++){
-        const innerTD = document.createElement('td');
-        innerTD.id = tbodyCounter;
-        tbodyCounter++;
-        tableBodyRow.appendChild(innerTD) ;
-    }
-  gameBoard.children[0].appendChild(tableBodyRow);
-  }
- 
-  
-  // console.log(table)
-}
-function scriptCreator(source){
-  const script = document.createElement("script");
-  script.src =source;
-  document.querySelector("body").appendChild(script);
-}
+function createHTMLBoard([height, width]) {
+	const tableHeadRow = document.createElement('tr');
+	tableHeadRow.id = 'head';
+	tableHeadRow.classList.add('piece');
+	let theadCounter = (height + 1) * 10;
+	for (let number = 0; number < width; number++) {
+		const innerTD = document.createElement('td');
+		innerTD.id = theadCounter;
+		theadCounter++;
+		tableHeadRow.appendChild(innerTD);
+	}
+	gameBoard.children[0].appendChild(tableHeadRow);
+	let reverseCounter = height;
+	for (let number = 0; number < height; number++) {
+		let tbodyCounter = reverseCounter * 10;
+		reverseCounter--;
+		const tableBodyRow = document.createElement('tr');
+		for (let number = 0; number < width; number++) {
+			const innerTD = document.createElement('td');
+			innerTD.id = tbodyCounter;
+			tbodyCounter++;
+			tableBodyRow.appendChild(innerTD);
+		}
+		gameBoard.children[0].appendChild(tableBodyRow);
+	}
 
-function createBoard(height,width) {
-  boardSize = [height,width];
-  selectorScreen.classList.toggle("hideme");
-  createBackgroundBoard(boardSize)
-  createHTMLBoard(boardSize)
-  if(document.querySelectorAll("script")[1] === undefined){
-    scriptCreator("connect4-main.js")
-    
-  } else{
+	// console.log(table)
 }
-  
+function scriptCreator(source) {
+	const script = document.createElement('script');
+	script.src = source;
+	document.querySelector('body').appendChild(script);
 }
 
-
-
-
+function createBoard(height, width) {
+	boardSize = [height, width];
+	selectorScreen.classList.toggle('hideme');
+	createBackgroundBoard(boardSize);
+	createHTMLBoard(boardSize);
+	if (document.querySelectorAll('script')[1] === undefined) {
+		scriptCreator('connect4-main.js');
+	} else {
+	}
+}
