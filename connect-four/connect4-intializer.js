@@ -114,6 +114,5 @@ function createBoard(height, width) {
 	createHTMLBoard(boardSize);
 	if (document.querySelectorAll('script')[1] === undefined) {
 		scriptCreator('connect4-main.js');
-	} else {
 	}
 }

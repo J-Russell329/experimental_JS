@@ -1,0 +1,54 @@
+<!doctype html>
+<head>
+  <title>Connect 4</title>
+  <link href="connect4.css" rel="stylesheet">
+</head>
+<body>
+  <h1>Connect 4</h1>
+  <div id="usernamearea">
+    
+      <P id="player1user">player1: </P>
+      <p id="player2user">player2: </p>
+  
+    
+  </div>
+  
+  <div id="loadscreen" class="loadscreen">
+    <div>
+      <h2>Connect Four</h2>
+      <p>Create player names and select a board size</p>
+      <form>
+        <div>
+          <input type="text" placeholder="player1 Name" name="player1" id="player1name">
+          <input type="color" name="player1color" id="player1color">
+          <label for="player1color">player 1 color</label>
+
+        </div>
+        <div>
+          <input type="text" placeholder="player2 Name" name="player2" id="player2name">
+          <input type="color" name="player2color" id="player2color">
+          <label for="player2color">player 2 color</label>
+        </div>
+      </form>
+      <button type="submit" id="normalsize">Normal<p>7x6</p></button>
+      <button type="submit" id="largesize">Large<p>8x7</p></button>
+      <button type="submit" id="extralarge">Extra large<p>9x8</p></button>
+    </div>
+  </div>
+  <div id="game">
+    <table id="board">
+      <tbody>
+      
+      </tbody>
+    </table>
+  </div>
+  <div id="nextplayer">
+
+  </div>
+  <div >
+    <button type="button" id="restartbutton" >RESTART!</button>
+  </div>
+<script src="connect4-intializer.js"></script>
+
+</body>
+</html>

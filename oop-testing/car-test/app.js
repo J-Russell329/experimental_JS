@@ -36,7 +36,7 @@ class Garage {
 	}
 	add(classObj) {
 		if (this.vehicles.length !== this.capacity) {
-			this.vehicles.push(classObj)
+			this.vehicles.push(classObj);
 		} else return 'Were Full!!!';
 	}
 }
