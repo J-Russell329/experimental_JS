@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+	</head>
+	<body>
+		<main>
+			<section id="inputs">
+				<input
+					type="text"
+					name="moviename"
+					id="movie"
+					placeholder="Movie Title"
+				/>
+				<input type="range" name="rating" id="rating" min="0" max="10" step=".5" value="0" />
+        <label for="rating" id="ratinglabel">0</label>
+				<button type="submit" id="moviesubmit">Submit</button>
+			</section>
+			<section id="list">
+        <ol id="ollist">
+
+        </ol>
+      </section>
+		</main>
+		<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+		<script src="app.js"></script>
+	</body>
+</html>
