@@ -1,0 +1,130 @@
+/* game board table */
+body {
+	background-color: black;
+	height: 100vh;
+	width: 100%;
+	margin: 0;
+	padding: 0;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.hideme {
+	visibility: hidden;
+}
+.loadscreen {
+	z-index: 99;
+	position: absolute;
+	width: 100%;
+	height: 100vh;
+	background-color: rgba(0, 0, 0, 0.8);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.loadscreen div {
+	z-index: 100;
+	background-color: #666;
+	display: flex;
+	flex-direction: column;
+	width: 30%;
+	height: 60vh;
+	text-align: center;
+}
+.loadscreen div div {
+	flex-direction: row;
+  width: auto;
+  height: 3vh;
+  justify-content: center;
+  align-items: center;
+}
+.loadscreen div button {
+	z-index: 100;
+	background-color: white;
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	flex: 1;
+	text-align: center;
+	justify-content: center;
+	align-items: center;
+}
+.loadscreen div button p {
+	margin: auto;
+}
+.loadscreen div button {
+	font-size: 40px;
+}
+#restartbutton {
+	position: absolute;
+	bottom: 5px;
+	left: 5px;
+}
+td {
+	background-color: cyan;
+	width: 85px;
+	height: 85px;
+	border: solid 1px #666;
+	/* display: flex; */
+	/* justify-content: center; */
+	/* align-items: center; */
+}
+#head td {
+	background-color: white;
+}
+
+/* pieces are div within game table cells: draw as colored circles */
+
+.player1 {
+	border-radius: 50%;
+	margin: auto;
+	width: 95%;
+	height: 95%;
+}
+
+.hover {
+	background-color: rgba(26, 201, 224, 0.89);
+}
+
+#nextplayer {
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  bottom: 30px;
+  left: 5px;
+  border-radius: 50%;
+}
+h1 {
+	color: cyan;
+	font-size: 50px;
+	position: absolute;
+	top: 2vh;
+	left: 5%;
+}
+h2 {
+	font-size: 50px;
+	margin-bottom: 25px;
+}
+#player1user, #player2user {
+  color: white;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+#usernamearea {
+  position: absolute;
+  top: 3vh;
+  display: flex;
+  flex-direction: row;
+  width: 250px;
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+  color: white;
+
+}
+#usernamearea div{
+  display: flex;
+  flex-direction: column;
+}
