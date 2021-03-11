@@ -53,10 +53,10 @@ class Game {
 	}
 	winCheck(array) {
 		return array.every((number) => {
-			if (game.currentPlayer === 'player1') {
-				return game.player1.has(number);
+			if (this.currentPlayer === 'player1') {
+				return this.player1.has(number);
 			} else {
-				return game.player2.has(number);
+				return this.player2.has(number);
 			}
 		});
 	}
