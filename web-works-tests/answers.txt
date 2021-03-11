@@ -1,0 +1,28 @@
+What is HTTP?
+	Hypertext Transfer Protocol
+
+What is a URL?
+	Uniform Resource Locator
+
+What is DNS?
+	Domain Name System
+
+What is a query string?
+	a get method 
+
+What are two HTTP verbs and how are they different?
+	get and post. get retrieves infomation without having side affects. post affects the server in some way
+
+What is an HTTP request?
+	a request made to the server to to do something
+
+What is an HTTP response?
+	the infomation the server gives back after a request is made
+
+What is an HTTP header? Give a couple examples of request and response headers you have seen.
+	the header has infomation on the user/request...etc. this can include error codes, time, content type, cache....   
+
+What are the processes that happen when you type “http://somesite.com/some/page.html” into a browser?
+	process domain into ip, send request, process data, server sends back data, data is processed, new reuests are sent based on file requirements.  
+
+
