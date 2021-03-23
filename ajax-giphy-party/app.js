@@ -8,7 +8,8 @@ async function getGif(search) {
 	const gif = await axios.get('http://api.giphy.com/v1/gifs/search?', {
 		params,
 	});
-	return gif.data.data[0].images.original.url;
+
+	return gif.data.data[0] && gif.data.data[0].images.original.url;
 }
 
 function createimg() {
@@ -35,7 +36,9 @@ form.addEventListener('click', async function (event) {
 	const searchInput = document.querySelector('#search').value;
 	if (event.target.id === 'submit' && searchInput !== '') {
 		const imgSrc = await getGif(searchInput);
-		appendimg(imgSrc);
+		if (imgSrc !== undefined) {
+			appendimg(imgSrc);
+		} else xalert('no gifs found');
 	}
 	if (event.target.id === 'resetbtn') {
 		imgReset();
