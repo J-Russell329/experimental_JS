@@ -23,7 +23,7 @@ function generateStoryMarkup(story) {
 	// console.debug('generateStoryMarkup', story);
 
 	console.debug('generateStroyMarkup');
-	console.log(story.storyId);
+
 	let favStar = 'far';
 	if (currentUser !== undefined) {
 		favStar = User.isStoryFavorite(story.storyId);
@@ -53,7 +53,7 @@ function putStoriesOnPage() {
 
 	User.addFavsToFavSet();
 	$allStoriesList.empty();
-	// console.log(storyList.stories);
+
 	// loop through all of our stories and generate HTML for them
 
 	for (let story of storyList.stories) {
@@ -77,9 +77,8 @@ async function postNewStory(event) {
 	const url = $('#create-url').val();
 	const story = await storyList.postStory({ title, author, url });
 	const $story = generateStoryMarkup(story);
-	// console.log($story);
+
 	$allStoriesList.prepend($story);
-	console.log($allStoriesList);
 }
 $storyFormBtn.on('click', postNewStory);
 
@@ -112,9 +111,9 @@ function putMyStoriesOnPage() {
 	console.debug('stories: putMyStoriesOnPage');
 
 	$myStories.empty();
-	// console.log(storyList.stories);
+
 	// loop through all of our stories and generate HTML for them
-	// console.log(currentUser.ownStories);
+
 	for (let story of currentUser.ownStories) {
 		const $story = generateStoryMarkup(story);
 		$myStories.append($story);
@@ -127,16 +126,16 @@ function putMyFavoritesOnPage() {
 	console.debug('stories: putMyFavoritesOnPage');
 	User.addFavsToFavSet();
 	$favoritedStories.empty();
-	// console.log(storyList.stories);
+
 	// loop through all of our stories and generate HTML for them
-	// console.log(currentUser.ownStories);
+
 	for (let story of currentUser.favorites) {
 		const $story = generateStoryMarkup(story);
 		// $story[0].classList.remove('far');
 		// $story[0].classList.add('fas');
-		// console.log($story[0]);
+
 		$favoritedStories.append($story);
 	}
-	// console.log($favoritedStories);
+
 	$favoritedStories.show();
 }

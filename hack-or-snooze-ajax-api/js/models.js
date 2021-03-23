@@ -117,25 +117,20 @@ class User {
 
 	//---------update favorites Page
 	static async updateFavorites(storyId, request) {
-		// console.log('testing method ' + request);
 		if (request === 'POST') {
 			console.debug('models: updateFavorites-add');
 			const story = storyList.stories.find((s) => s.storyId === storyId);
 			currentUser.favorites.unshift(story);
-			console.log(story);
 			return;
 		} else {
 			console.debug('models: updateFavorites-remove');
 
 			currentUser.favorites.forEach((favStory, index) => {
 				if (favStory.storyId === storyId) {
-					console.log(index);
 				}
 			});
 			return;
 		}
-		// console.log(currentUser.favorites);
-		// console.log(story);
 	}
 
 	///-----send Post Request for Favrite
@@ -157,10 +152,8 @@ class User {
 		console.debug('models: addFavsToFavSet');
 		try {
 			if (currentUser === undefined) {
-				console.log('oh no');
 				return;
 			} else {
-				console.log('oh no');
 				currentUser.favorites.forEach((array) =>
 					currentUser.favoriteSet.add(array.storyId)
 				);
@@ -170,7 +163,6 @@ class User {
 
 	static isStoryFavorite(storyId) {
 		console.debug('models: isStoryFavorite');
-		console.log(storyId);
 		return currentUser.favoriteSet.has(storyId) ? 'fas' : 'far';
 	}
 
