@@ -22,7 +22,7 @@ async function getAndShowStoriesOnStart() {
 function generateStoryMarkup(story) {
 	// console.debug('generateStoryMarkup', story);
 
-	console.debug('generateStroyMarkup');
+	console.debug('Stories: generateStroyMarkup');
 
 	let favStar = 'far';
 	if (currentUser !== undefined) {
@@ -49,7 +49,7 @@ function generateStoryMarkup(story) {
 /** Gets list of stories from server, generates their HTML, and puts on page. */
 
 function putStoriesOnPage() {
-	console.debug('putStoriesOnPage');
+	console.debug('Stories: putStoriesOnPage');
 
 	User.addFavsToFavSet();
 	$allStoriesList.empty();
