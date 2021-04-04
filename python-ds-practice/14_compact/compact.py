@@ -6,7 +6,7 @@ def compact(lst):
     """
     true_list = []
     for item in lst:
-        if not not item == True:
+        if  item:
             true_list.append(item)
     return true_list
 
