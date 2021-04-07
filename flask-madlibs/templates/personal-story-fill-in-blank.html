@@ -1,0 +1,11 @@
+{% extends 'base.html' %} {% block title %} Home {% endblock %} {% block main %}
+<h1>Custom Story</h1>
+<p>please place in text and submit</p>
+<form action="/personal-story">
+	{% for item in personal_prompts %}
+	<input type="text" name="{{item}}" placeholder="{{item}}" />
+	{% endfor %}
+	<button type="submit">submit!</button>
+</form>
+
+{% endblock %}

@@ -1,0 +1,15 @@
+{% extends 'base.html' %} {% block title %} Home {% endblock %} {% block main %}
+<h1>madlibs</h1>
+<p>testing to make sure everything is working as it should</p>
+<form action="/story">
+	{% for item in prompts %}
+	<input type="text" name="{{item}}" placeholder="{{item}}" />
+	{% endfor %}
+	<button type="submit">submit!</button>
+</form>
+<div class="special">
+	<div>
+		<a href="/create-a-story"><button>create a story!</button></a>
+	</div>
+</div>
+{% endblock %}

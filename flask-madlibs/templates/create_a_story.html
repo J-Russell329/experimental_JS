@@ -1,0 +1,36 @@
+{% extends 'base.html' %} {% block title %} Home {% endblock %} {% block main %}
+<h1>madlibs</h1>
+<p>please fill in the blanks & click submit</p>
+<form id="create-field" action="/personal-story-fill-in-blank">
+	<label for="blanks"
+		>please insert the blanks your would like to add to your text
+	</label>
+	<input
+		type="text"
+		name="blanks"
+		placeholder="example: '[ ' noun ' , ' verb ' , ' place ' , ' adjective ' ]'"
+	/>
+	<label for="text">
+		please insert your story. note: every place holder blank must be
+		definded in the blanks section too.
+	</label>
+	<p>
+		example: 'Once upon a time in a long-ago {place}, there lived a large
+		{adjective} {noun}. It loved to {verb} {plural_noun}.'
+	</p>
+	<input
+		type="text"
+		name="text"
+		placeholder="text example: 'Once upon a time in a long-ago {place}, there lived a
+    large {adjective} {noun}. It loved to {verb} {plural_noun}.'"
+	/>
+
+	<button type="submit">submit!</button>
+</form>
+
+<div class="special">
+	<div>
+		<a href="/"><button>use basic story</button></a>
+	</div>
+</div>
+{% endblock %}
