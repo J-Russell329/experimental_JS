@@ -39,3 +39,6 @@ def send_data():
     if len(temp_answer)>0:
         answers.append(temp_answer[0])
     return redirect(f'/question/{len(answers)}')
+
+@app.route('session', methods=['POST'])
+def 
