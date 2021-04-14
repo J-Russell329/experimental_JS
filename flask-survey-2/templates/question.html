@@ -1,0 +1,15 @@
+{% extends 'base.html' %} {% block title %} Testing Title {% endblock %} {%
+block main %}
+<h1>{{question}}</h1>
+<form action="/question/send">
+	{% for choice in choices %}
+	<input type="checkbox" name="{{choice}}" id="" />
+	<label for="choice">{{choice}}</label>
+	<!-- <input type="button" value="{{choice}}" /> -->
+	<!-- <input type="radio" name="" id="" /> -->
+	<!-- input -->
+	<!-- <button type="submit">{{choice}}</button> -->
+	{% endfor %}
+	<button type="submit">submit!</button>
+</form>
+{% endblock %}

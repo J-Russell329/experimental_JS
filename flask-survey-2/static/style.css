@@ -1,0 +1,45 @@
+main {
+	background-color: darkslategray;
+	text-align: center;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: auto;
+	height: 100%;
+	padding: 0;
+	margin: 0;
+}
+body {
+	padding: 0;
+	margin: 0;
+	height: 100vh;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+p,
+label {
+	color: white;
+}
+
+section {
+	position: absolute;
+	width: 100%;
+	top: 10vh;
+	display: flex;
+	justify-content: center;
+}
+section div {
+	border: 1px black;
+	width: 70%;
+	text-align: center;
+	background-color: rgba(255, 0, 0, 0.5);
+}
+
+.center {
+	background-color: dimgray;
+	height: 25vh;
+	width: 40%;
+}
