@@ -1,0 +1,16 @@
+{% extends 'base.html' %} {% block title %} Home Page {% endblock %} {% block
+main %}
+<h1>tester page!</h1>
+<form action="/test/post" method="POST">
+	<!-- <button type="submit">
+		<input type="button" name="test" value="testing things" />
+	</button> -->
+	<label>
+		<input type="radio" name="{{choice}}" id="{{choice}}" checked />
+		{{choice}}
+	</label>
+
+	<button type="submit">submit!</button>
+</form>
+
+{% endblock %}

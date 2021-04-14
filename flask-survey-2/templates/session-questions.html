@@ -1,0 +1,20 @@
+{% extends 'base.html' %} {% block title %} Testing Title {% endblock %} {%
+block main %}
+<h1>{{question}}</h1>
+<!-- <form action="/session-questions/post" method="POST"> -->
+{% for choice in choices %}
+<!-- <a href="/session-qustions/post"
+		><button name="choice" type="submit">{{choice}}</button></a
+	> -->
+<!-- <input type="checkbox" name="{{choice}}" id="" />
+	<label for="choice">{{choice}}</label> -->
+<!-- <label>
+		<input type="radio" name="{{choice}}" id="{{choice}}" /> {{choice}}
+	</label> -->
+<form action="/session-questions/post" method="post">
+	<input type="submit" name="choice" value="{{choice}}" />
+</form>
+{% endfor %}
+<!-- <button type="submit">submit!</button> -->
+<!-- </form> -->
+{% endblock %}
