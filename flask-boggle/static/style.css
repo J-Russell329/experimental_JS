@@ -1,0 +1,96 @@
+body {
+	background-color: black;
+	color: white;
+}
+
+#gameBoardDiV {
+	width: 100%;
+	height: 100vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+#gameSection {
+	min-width: 500px;
+	min-height: 500px;
+	max-width: 500px;
+	max-height: 500px;
+	background-color: darkslategray;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.letterDIV {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+}
+
+.letterDIV p {
+	font-size: large;
+	margin: 5px;
+	padding: 10px;
+	min-width: 30px;
+	max-width: 30px;
+	min-height: 30px;
+	max-height: 30px;
+	background-color: darkolivegreen;
+}
+form {
+	margin-top: 15px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+form div {
+	margin-bottom: 5px;
+}
+
+#wordSection {
+	display: flex;
+}
+#goodWords,
+#badWords {
+	min-width: 250px;
+	max-width: 250px;
+	min-height: 50px;
+}
+#goodWords {
+	background-color: rgba(0, 255, 0, 0.2);
+}
+
+#badWords {
+	background-color: rgba(255, 0, 0, 0.2);
+}
+#goodWords p,
+#badWords p {
+	margin: 0;
+}
+
+#scoreDIV {
+	position: relative;
+	display: flex;
+	flex-direction: row;
+	/* top: 50px;
+	left: 50px; */
+}
+
+.end-game {
+	background-color: rgba(0, 0, 0, 0.8);
+	position: absolute;
+	z-index: 999;
+	width: 100%;
+	height: 100vh;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+.invisable {
+	display: none;
+}
