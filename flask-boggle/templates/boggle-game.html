@@ -1,0 +1,44 @@
+{% extends 'base.html' %} {% block title %} Boggle Game {% endblock %} {% block
+main %}
+<div id="end-screen" class="invisable">
+	<div id="end-screen-window">
+		<div>Score: <span id="end-screen-score"> 0 </span></div>
+		<button id="restart-btn">Restart!</button>
+	</div>
+</div>
+<div id="game-stats">
+	<p>Games Played: <span id="stats-games-played"></span></p>
+	<p>Highest Score: <span id="stats-high-score"></span></p>
+</div>
+<div id="gameBoardDiV">
+	<section id="gameSection">
+		<div id="upper-section">
+			<div id="scoreDIV">
+				<span>Score: </span><span id="score">0</span>
+			</div>
+			<div id="timer">
+				<span>60</span>
+			</div>
+		</div>
+		<div id="rowDIV">
+			{% for row in game_board %}
+			<div class="letterDIV">
+				{% for letter in row %}
+				<p>{{letter}}</p>
+				{% endfor %}
+			</div>
+			{% endfor %}
+		</div>
+		<form action="">
+			<input type="text" name="word" id="word" />
+			<button type="submit" id="submit-btn">submit!</button>
+		</form>
+		<div id="wordSection">
+			<div id="goodWords"></div>
+			<div id="badWords"></div>
+		</div>
+	</section>
+</div>
+<script src="../static/app.js"></script>
+
+{% endblock %}
