@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block title %} {{user.first_name}} {% endblock %}
+{% block main %} 
+<div class="linear">
+    <img src="{{user.image_url}}" alt="">
+    <div class='second-div'>
+        <div><h1>{{user.get_full_name()}}</h1> </div>
+        <div>
+            <span><a href="/users/{{user.id}}/edit" m>  <button class='blue btn'> Edit </button></a></span>
+            <span>
+                <form action="/users/{{user.id}}/delete" method="POST">
+                    <button class='red btn'> Delete </button>
+                </form>
+        </span>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

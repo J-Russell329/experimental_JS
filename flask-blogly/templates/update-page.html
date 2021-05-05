@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block title %} {{user.first_name}} Edit {% endblock %}
+{% block main %} 
+<h1>Edit A user</h1>
+
+<form action="/users/{{user.id}}/edit" class="column" method="POST">
+    <input type="text"  name="first_name" value="{{user.first_name}}">
+    <input type="text" name="last_name" value="{{user.last_name}}">
+    <input type="text" name="image_url" value="{{user.image_url}}">
+    <div class='flex-end'>
+        <span>
+            <a href="http://localhost:5000/users/{{user.id}}">
+                <button class="clear btn" type="button">Cancel</button>
+            </a>
+        </span>   
+        <span>
+            <button class="green btn" type="submit">Save</button>
+        </span>   
+    </div>
+    
+
+
+</form>
+
+{% endblock %}
