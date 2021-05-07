@@ -13,6 +13,18 @@
                 </form>
         </span>
         </div>
+        <div>
+            <ul>
+            {% for post in user.posts %}
+                <li><a href="/posts/{{post.id}}">{{post.title}}</a></li>
+            {% endfor %}
+            </ul>
+        </div>
+        <div>
+            <a href="/users/{{user.id}}/posts/new">
+                <button class='blue btn'>Add Post</button>
+            </a>
+        </div>
     </div>
 </div>
 

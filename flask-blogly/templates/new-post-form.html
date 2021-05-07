@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block title %} New Post {% endblock %}
+{% block main %}
+    <h1>Add Post for {{user.get_full_name()}}</h1>
+    <form action="/users/{{user.id}}/posts/new" method="POST" class='column'>
+        <div class='block'>
+            <label for="title" class='label'>Title</label>   
+            <input type="text" name="title" class='smallform'>
+        </div>
+        <div class='block'>
+            <label for="content" class='label'>Content</label>
+            <input type="text"  name="content" class='largeform'>
+        </div>
+        <div class="flex-end">
+            <a href="/users/{{user.id}}">
+                <button type="button" class='blue btn'>Cancel</button>
+            </a>
+            <button type="submit" class='green btn'>Add</button>
+        </div>
+    </form>
+{% endblock %}

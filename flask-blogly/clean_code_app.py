@@ -9,3 +9,10 @@ def is_good_user(first,last,image):
 
     return [first,last,image]
     
+def is_good_post(title,content):
+    if title == '':
+        return 'title is invalid'
+
+    elif content == '':
+        return 'content must be filled out'
+    return[title,content]

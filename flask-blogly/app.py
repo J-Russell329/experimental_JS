@@ -1,9 +1,10 @@
 """Blogly application."""
 
 from flask import Flask, render_template, redirect, request, flash
-from models import db, connect_db, User
+from models import db, connect_db, User, Post
 from flask_debugtoolbar import DebugToolbarExtension
 from clean_code_app import *
+from datetime import datetime
 
 
 
@@ -95,4 +96,33 @@ def delete_page(user_id):
     flash(f'user has been deleted (id:{user_id})')
     return redirect('/')
 
+@app.route('/users/<user_id>/posts/new', methods = ['POST','GET'])
+def  new_user_post(user_id):
 
+    if request.method == 'GET':
+        data_user = User.query.get(user_id)
+        return render_template('new-post-form.html', user = data_user)
+
+    if request.method == 'POST':
+        pre_post = is_good_post(request.form['title'],request.form['content'])
+
+        if type(pre_post) == type(''):
+            flash(f'{pre_post}')
+            return redirect(f'/users/{user_id}/posts/new')
+
+        data_post = Post(
+            title = pre_post[0],
+            content = pre_post[1],
+            user_id = int(user_id)
+            )
+        
+        db.session.add(data_post)
+        db.session.commit()
+        
+        post_id = data_post.id
+        return redirect(f'/posts/{post_id}/')
+
+@app.route('/posts/<post_id>')
+def post_route(post_id):
+    data_post = Post.query.get(post_id)
+    return render_template('post-page.html', post = data_post)
