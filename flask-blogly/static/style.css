@@ -67,10 +67,14 @@ nav{
     background-color: rgba(255, 0, 0, .4);
     padding: 10px;
 }
-.smallform, .largeform{
+.smallform, .largeform, .xlargeform{
     display: flex;
     flex: 2;
     justify-content: flex-end;
+}
+.xlargeform{
+    height: 50px;
+    word-wrap:normal;
 }
 .block{
     display: flex;
@@ -80,3 +84,4 @@ nav{
     flex: 0 50px;
     margin-right: 10px;
 }
+

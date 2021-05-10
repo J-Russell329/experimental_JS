@@ -1,7 +1,7 @@
 """Blogly application."""
 
 from flask import Flask, render_template, redirect, request, flash
-from models import db, connect_db, User, Post
+from models import db, connect_db, User, Post, Tag, PostTag
 from flask_debugtoolbar import DebugToolbarExtension
 from clean_code_app import *
 from datetime import datetime
@@ -24,13 +24,14 @@ db.create_all()
 
 @app.route('/')
 def home():
-    return redirect('/users')
+    data_posts = Post.query.order_by(Post.created_at.asc()).limit(5).all()
+    return render_template("home.html", data=data_posts)
     
 
 @app.route('/users')
 def all_users():
     data = User.query.order_by(User.first_name.asc(),User.last_name.asc()).limit(25).all()
-    return render_template('home.html', data=data )
+    return render_template('all-users.html', data=data )
 
 @app.route('/users/new', methods = ['POST', 'GET'])
 def new_user():
@@ -62,7 +63,12 @@ def new_user():
 @app.route('/users/<user_id>')
 def user_page(user_id):
     data = User.query.get(user_id)
-    return render_template('user-page.html', user = data)
+    if data == None:
+        flash("no such user exists")
+        return redirect("/users")
+    else:
+
+        return render_template('user-page.html', user = data)
 
 @app.route('/users/<user_id>/edit', methods = ["POST", "GET"])
 def update_page(user_id):
@@ -124,5 +130,66 @@ def  new_user_post(user_id):
 
 @app.route('/posts/<post_id>')
 def post_route(post_id):
+
     data_post = Post.query.get(post_id)
-    return render_template('post-page.html', post = data_post)
+    print('****************************')
+    print(post_id)
+    if data_post == None:
+        flash("no such post exists")
+        return redirect("/")
+    else:
+        return render_template('post-page.html', post = data_post)
+
+@app.route('/posts/<post_id>/edit', methods = ["POST", "GET"])
+def post_edit_route(post_id):
+    if request.method == "GET":
+        data_post = Post.query.get(post_id)
+        return render_template('post-edit.html', post = data_post)
+    
+    if request.method == "POST":
+        data_post = Post.query.get(post_id)
+        pre_post_update = is_good_post(request.form['title'],request.form['content'])
+
+        if type(pre_post_update) == type(''):
+            flash(f'{pre_post_update}')
+            return redirect(f'/users/{post_id}/edit')
+
+        data_post.title = pre_post_update[0]
+        data_post.content = pre_post_update[1]
+        
+        db.session.add(data_post)
+        db.session.commit()
+
+        return redirect(f'/posts/{post_id}')
+
+@app.route('/posts/<post_id>/delete', methods = ["POST"])
+def post_delete_route(post_id):
+    Post.query.filter(Post.id == post_id).delete()
+    db.session.commit()
+    return redirect('/')
+
+@app.route('/tags', methods = ["POST", "GET"])
+def tags_route():
+    if request.method == "GET":
+        data_tags = Tag.query.all()
+        return render_template("tags.html", tags=data_tags)
+
+    if request.method == "POST":
+        pre_new_tag = is_good_tag(request.form['tag'])
+
+        if type(pre_new_tag) == type(''):
+            flash(f"{pre_new_tag}")
+            return redirect("/tags")
+
+        new_tag = Tag(name = pre_new_tag[0])
+
+        
+        db.session.add(new_tag)
+        db.session.commit()
+        return redirect('/tags')
+        
+
+
+@app.route('/posts')
+def all_posts():
+    return redirect('/')

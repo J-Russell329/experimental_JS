@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block title %} Post ID: {{post.id}} EDIT {% endblock %}
+{% block main %}  
+<h1>EDIT POST</h1>
+<form action="/posts/{{post.id}}/edit" class="column" method="POST">
+    <div class='block'>
+        <label for="title" class='label'>Title</label>
+        <input type="text" class='smallform' name="title" value="{{post.title}}">
+    </div>
+    <div class='block'>
+        <label for="content" class='label'>Post Content </label>
+        <input type="text"  class='xlargeform' name="content" value="{{post.content}}">
+    </div>
+    <div class="flex-end">
+        <a href="/posts/{{post.id}}"><button type="button" class="btn red">Cancel</button></a>
+        <button type="submit" class="btn green">Save</button>
+    </div>
+</form>
+<!-- <h1>{{post.title}}</h1>
+<p> {{post.content}}</p> -->
+{% endblock %}

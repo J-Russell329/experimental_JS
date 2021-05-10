@@ -63,8 +63,29 @@ class Post(db.Model):
     def __repr__(self):
         return f"<Post: id:{self.id}, Title:{self.title}>"
  
+class Tag(db.Model):
+    """
+    Creates an instance of the tags table. holds the infomation of
+    the available tags
+    """
+
+    __tablename__ = "tags"
+
+    id = db.Column(db.Integer, primary_key = True, autoincrement = True)
+    name = db.Column(db.String, nullable = False, unique = True)
 
 
 
+class PostTag(db.Model):
+    """
+    Creates a class instance that connects the Posts table to the Tags table
+    """ 
 
+    __tablename__ = "post_tags"
 
+    id = db.Column(db.Integer, primary_key = True, autoincrement = True)
+    post_id = db.Column(db.Integer, db.ForeignKey('posts.id'), nullable = False)
+    tag_id = db.Column(db.Integer, db.ForeignKey('tags.id'), nullable = False)
+
+    posts = db.relationship('Post', backref ='posttags')
+    tags = db.relationship('Tag', backref ='posttags')

@@ -16,3 +16,9 @@ def is_good_post(title,content):
     elif content == '':
         return 'content must be filled out'
     return[title,content]
+
+def is_good_tag(name):
+    if name == '':
+        return 'tag name is invalid'
+    
+    return [name]

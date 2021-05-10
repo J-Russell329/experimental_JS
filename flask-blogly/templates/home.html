@@ -1,10 +1,10 @@
 {% extends 'base.html' %}
-{% block title %} User List {% endblock %}
-{% block main %} <h1>Users</h1> 
-<ul>
- {% for user in data %}
-    <a href="/users/{{user.id}}"><li>{{user.get_full_name()}}</li></a>
- {% endfor %}
-</ul>
-<a href="users/new">  <button> Add User! </button></a>
+{% block title %} Users App {% endblock %} 
+{% block main %} 
+    <h1>Top 5 recent posts!</h1>
+    <ul>
+    {% for post in data %}
+        <li><a href="/posts/{{post.id}}">{{post.title}}</a></li>
+    {% endfor %}
+    </ul>
 {% endblock %}

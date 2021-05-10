@@ -11,6 +11,12 @@
             <label for="content" class='label'>Content</label>
             <input type="text"  name="content" class='largeform'>
         </div>
+        {% for tag in tags%}
+        <div>
+            <label for="{{tag.name}}"></label>
+            <input type="checkbox" name="{{tag.name}}">
+        </div>
+        {% endfor %}
         <div class="flex-end">
             <a href="/users/{{user.id}}">
                 <button type="button" class='blue btn'>Cancel</button>
