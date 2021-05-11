@@ -48,16 +48,7 @@ class Post(db.Model):
     title = db.Column(db.String(50), nullable = False)
     content = db.Column(db.String(5000), nullable = False)
     created_at = db.Column(db.DateTime, nullable = False)
-    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable = False)
-
-    def __init__(self, **rest):
-        self.created_at = datetime.now()
-        try:
-            self.title = rest["title"]
-            self.content = rest["content"]
-            self.user_id = rest["user_id"]
-        except:
-            raise ValueError('a post requires a title and content.')
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
         
     
     def __repr__(self):
@@ -74,7 +65,11 @@ class Tag(db.Model):
     id = db.Column(db.Integer, primary_key = True, autoincrement = True)
     name = db.Column(db.String, nullable = False, unique = True)
 
+    posts = db.relationship('Post', backref ='tags')
+    post_tags = db.relationship('posts_tags', backref ='tags')
 
+    def __repr__(self):
+        return f"<Tag: id:{self.id}, name: {self.name}>"
 
 class PostTag(db.Model):
     """
@@ -83,9 +78,9 @@ class PostTag(db.Model):
 
     __tablename__ = "post_tags"
 
-    id = db.Column(db.Integer, primary_key = True, autoincrement = True)
-    post_id = db.Column(db.Integer, db.ForeignKey('posts.id'), nullable = False)
-    tag_id = db.Column(db.Integer, db.ForeignKey('tags.id'), nullable = False)
+    post_id = db.Column(db.Integer, db.ForeignKey('posts.id'), primary_key=True)
+    tag_id = db.Column(db.Integer, db.ForeignKey('tags.id'), primary_key=True)
 
-    posts = db.relationship('Post', backref ='posttags')
-    tags = db.relationship('Tag', backref ='posttags')
+
+    def __repr__(self):
+        return f"<Post_Tag: id:{self.id}, Post_id: {self.post_id}, tag_id:{self.tag_id}>"

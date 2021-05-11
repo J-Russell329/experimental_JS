@@ -13,8 +13,8 @@
         </div>
         {% for tag in tags%}
         <div>
-            <label for="{{tag.name}}"></label>
-            <input type="checkbox" name="{{tag.name}}">
+            <input type="checkbox" name="tags" value="{{tag.id}}">
+            <label for="{{tag.name}}">{{tag.name}}</label>
         </div>
         {% endfor %}
         <div class="flex-end">

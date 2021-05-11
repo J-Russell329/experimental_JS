@@ -107,10 +107,13 @@ def  new_user_post(user_id):
 
     if request.method == 'GET':
         data_user = User.query.get(user_id)
-        return render_template('new-post-form.html', user = data_user)
+        data_tags = Tag.query.all()
+        return render_template('new-post-form.html', user = data_user, tags = data_tags)
 
     if request.method == 'POST':
         pre_post = is_good_post(request.form['title'],request.form['content'])
+        checked_tags = request.form.getlist('tags')
+
 
         if type(pre_post) == type(''):
             flash(f'{pre_post}')
@@ -121,19 +124,23 @@ def  new_user_post(user_id):
             content = pre_post[1],
             user_id = int(user_id)
             )
+
+        tag_ids = [int(num) for num in request.form.getlist("tags")]
+        data_post.tags = Tag.query.filter(Tag.id.in_(tag_ids)).all()      
+
+        print("*****************************************")  
+        print(data_post.tags)
         
         db.session.add(data_post)
         db.session.commit()
         
         post_id = data_post.id
-        return redirect(f'/posts/{post_id}/')
+        return redirect(f'/posts/{post_id}')
 
 @app.route('/posts/<post_id>')
 def post_route(post_id):
 
     data_post = Post.query.get(post_id)
-    print('****************************')
-    print(post_id)
     if data_post == None:
         flash("no such post exists")
         return redirect("/")
@@ -144,7 +151,8 @@ def post_route(post_id):
 def post_edit_route(post_id):
     if request.method == "GET":
         data_post = Post.query.get(post_id)
-        return render_template('post-edit.html', post = data_post)
+        data_tags = Tag.query.all()
+        return render_template('post-edit.html', post = data_post, tags =data_tags)
     
     if request.method == "POST":
         data_post = Post.query.get(post_id)
@@ -183,7 +191,6 @@ def tags_route():
 
         new_tag = Tag(name = pre_new_tag[0])
 
-        
         db.session.add(new_tag)
         db.session.commit()
         return redirect('/tags')
