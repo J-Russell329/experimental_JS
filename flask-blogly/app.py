@@ -1,5 +1,6 @@
 """Blogly application."""
 
+from re import S
 from flask import Flask, render_template, redirect, request, flash
 from models import db, connect_db, User, Post, Tag, PostTag
 from flask_debugtoolbar import DebugToolbarExtension
@@ -24,7 +25,7 @@ db.create_all()
 
 @app.route('/')
 def home():
-    data_posts = Post.query.order_by(Post.created_at.asc()).limit(5).all()
+    data_posts = Post.query.order_by(Post.created_at.desc()).limit(5).all()
     return render_template("home.html", data=data_posts)
     
 
@@ -124,16 +125,25 @@ def  new_user_post(user_id):
             content = pre_post[1],
             user_id = int(user_id)
             )
-
-        tag_ids = [int(num) for num in request.form.getlist("tags")]
-        data_post.tags = Tag.query.filter(Tag.id.in_(tag_ids)).all()      
-
-        print("*****************************************")  
-        print(data_post.tags)
         
         db.session.add(data_post)
         db.session.commit()
-        
+
+        ### is there a way to grab the id before commit the post? or possibly a diffrent way to commit them both at the same time?
+        tag_ids = [int(num) for num in request.form.getlist("tags")]
+        print('**************************************************')
+        for tag_id in tag_ids:
+            db.session.add(PostTag(post_id=data_post.id , tag_id= tag_id))
+            print('test')
+            print(f'post id: {data_post.id} tag id: {tag_id}')
+        # data_post.tags = Tag.query.filter(Tag.id.in_(tag_ids)).all()
+
+        print("*****************************************")  
+        print(tag_ids)
+
+        db.session.commit()
+
+
         post_id = data_post.id
         return redirect(f'/posts/{post_id}')
 
@@ -141,11 +151,12 @@ def  new_user_post(user_id):
 def post_route(post_id):
 
     data_post = Post.query.get(post_id)
+    data_tags = data_post.tags
     if data_post == None:
         flash("no such post exists")
         return redirect("/")
     else:
-        return render_template('post-page.html', post = data_post)
+        return render_template('post-page.html', post = data_post, tags=data_tags)
 
 @app.route('/posts/<post_id>/edit', methods = ["POST", "GET"])
 def post_edit_route(post_id):
@@ -162,10 +173,32 @@ def post_edit_route(post_id):
             flash(f'{pre_post_update}')
             return redirect(f'/users/{post_id}/edit')
 
+        PostTag.query.filter(PostTag.post_id == post_id).delete()
+
+
         data_post.title = pre_post_update[0]
         data_post.content = pre_post_update[1]
         
         db.session.add(data_post)
+        db.session.commit()
+
+        # should proably add in some logic to prvent trying to add in some new tags.
+        # and delete the ones that the user no longer wants to include with the post 
+        # scratch that i can just delete the old ones and create new ones 
+        # this is just a coding time saving method and may not be the best in terms of
+        # big O notation.
+
+        tag_ids = [int(num) for num in request.form.getlist("tags")]
+        print('**************************************************')
+        for tag_id in tag_ids:
+            db.session.add(PostTag(post_id=data_post.id , tag_id= tag_id))
+            print('test')
+            print(f'post id: {data_post.id} tag id: {tag_id}')
+        # data_post.tags = Tag.query.filter(Tag.id.in_(tag_ids)).all()
+
+        print("*****************************************")  
+        print(tag_ids)
+
         db.session.commit()
 
         return redirect(f'/posts/{post_id}')
@@ -195,8 +228,55 @@ def tags_route():
         db.session.commit()
         return redirect('/tags')
         
-
-
 @app.route('/posts')
 def all_posts():
     return redirect('/')
+
+@app.route('/tags/<tag_name>')
+def tag_name_route(tag_name):
+    data_tag = Tag.query.filter(Tag.name == tag_name).one_or_none()
+    if data_tag == None:
+        flash('Error: no tag by that name was found')
+        return redirect('/tags')
+    return render_template('/tag-id-route.html', tag=data_tag)
+
+@app.route('/tags/<tag_name>/delete', methods = ["POST"])
+def tag_delete(tag_name):
+    try:
+        data_tag = Tag.query.filter(Tag.name == tag_name).one()
+        flash(f'the tag is no more: {data_tag.name}')
+        db.session.delete(data_tag)
+        db.session.commit()
+    except:
+        flash('I guess the tag deleted itself becuase there was nothing there...how did you even get here anyways?')
+        return redirect('/tags')
+    
+    return redirect('/tags')
+
+@app.route('/tags/<tag_name>/edit', methods = ["POST", "GET"])
+def tag_edit_route(tag_name):
+    if request.method == "GET":
+        data_tag = Tag.query.filter(Tag.name == tag_name).one_or_none()
+        if data_tag == None:
+            flash('no such tag exists')
+            return redirect('/tags')
+        return render_template('tag-edit-route.html', tag=data_tag)
+
+    if request.method == "POST":
+        data_tag = Tag.query.filter(Tag.name == tag_name).one_or_none()
+        if data_tag == None:
+            flash('no such tag exists')
+            return redirect('/tags')
+
+        
+        if str(request.form['tag']).strip() == '':
+            #this function does not account for an error after sending to SQL
+            flash('invalid tag name')
+            return redirect(f'/tags/{tag_name}/edit')
+
+        data_tag.name = str(request.form['tag']).strip()   
+        db.session.add(data_tag)
+        db.session.commit()
+
+        flash(f'name changed from "{tag_name}" to "{data_tag.name}"')
+        return redirect(f'/tags')

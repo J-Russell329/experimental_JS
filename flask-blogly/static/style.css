@@ -84,4 +84,17 @@ nav{
     flex: 0 50px;
     margin-right: 10px;
 }
+.tags-block {
+    display: flex;
+    height: 20px;
+    align-items: center;
+}
 
+.display-2{
+    font-size: larger;
+    text-decoration: solid;
+}
+
+.small-text{
+    font-size: 10px;
+}

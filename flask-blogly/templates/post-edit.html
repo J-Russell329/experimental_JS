@@ -13,7 +13,7 @@
     </div>
     {% for tag in tags%}
         <div>
-            <input type="checkbox" name="{{tag.name}}">
+            <input type="checkbox" name="tags" value="{{tag.id}}">
             <label for="{{tag.name}}">{{tag.name}}</label>
         </div>
         {% endfor %}

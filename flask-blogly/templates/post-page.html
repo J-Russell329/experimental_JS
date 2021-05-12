@@ -6,6 +6,15 @@
     <h1>{{post.title}}</h1>
     <h3>create by: <a href="/users/{{post.users.id}}">{{post.users.get_full_name()}}</a></h3>
     <p> {{post.content}}</p>
+    <div class="tags-block">
+        <span class="display-2"><b>Tags:</b> </span>
+        
+        <span >
+            {% for tag in tags %}
+            <a href="/tags/{{tag.name}}"><button class="blue btn" type="button">{{tag.name}}</button></a>
+            {% endfor %}
+        </span>
+    </div>
     <div class="flex-end">
         <a href="/posts/{{post.id}}/edit"><button type="button" class="blue btn">Edit</button></a>
         <form action="/posts/{{post.id}}/delete" method="POST"><button type="submit" class="red btn">Delete</button></form>
