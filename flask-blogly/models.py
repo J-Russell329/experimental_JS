@@ -91,8 +91,8 @@ class Tag(db.Model):
 
     ### notes: i guess this syntax doesn't work. can't have multiple back refs laid out in this way
     ### why is this line of code breaking my app?
-    # posts = db.relationship('Post', backref ='tags')
 
+    # posts = db.relationship('Post', backref ='tags')
     # post_tags = db.relationship('PostTag', backref ='tags')
 
     ### notes: this is the proper syntax for having multiple back refs... i guess... not sure what the diffrence is

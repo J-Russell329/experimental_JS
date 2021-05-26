@@ -26,15 +26,15 @@ db.session.add(Post(title='first post', content='I managed to make the first pos
 
 # the multiple sessions commits is to give each one a diffrent time.... 
 # i know its less effecient this way but thats fine for now
-db.sesion.commit()
+db.session.commit()
 db.session.add(Post(title='second post', content='lots of content in here', user_id=1))
-db.sesion.commit()
+db.session.commit()
 db.session.add(Post(title='third post', content='less content', user_id=4))
-db.sesion.commit()
+db.session.commit()
 db.session.add(Post(title='fourth post', content="great content that you can't see", user_id=4))
-db.sesion.commit()
+db.session.commit()
 db.session.add(Post(title='fith post', content='the best content you will ever be able to find', user_id=5))
-db.sesion.commit()
+db.session.commit()
 
 db.session.add(Tag(name='great post'))
 db.session.add(Tag(name='bad post'))

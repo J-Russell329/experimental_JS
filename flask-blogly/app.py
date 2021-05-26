@@ -113,8 +113,6 @@ def  new_user_post(user_id):
 
     if request.method == 'POST':
         pre_post = is_good_post(request.form['title'],request.form['content'])
-        checked_tags = request.form.getlist('tags')
-
 
         if type(pre_post) == type(''):
             flash(f'{pre_post}')
@@ -131,18 +129,17 @@ def  new_user_post(user_id):
 
         ### is there a way to grab the id before commit the post? or possibly a diffrent way to commit them both at the same time?
         tag_ids = [int(num) for num in request.form.getlist("tags")]
-        print('**************************************************')
+        # print('**************************************************')
         for tag_id in tag_ids:
             db.session.add(PostTag(post_id=data_post.id , tag_id= tag_id))
-            print('test')
-            print(f'post id: {data_post.id} tag id: {tag_id}')
+            # print('test')
+            # print(f'post id: {data_post.id} tag id: {tag_id}')
         # data_post.tags = Tag.query.filter(Tag.id.in_(tag_ids)).all()
 
-        print("*****************************************")  
-        print(tag_ids)
-
-        db.session.commit()
-
+        # print("*****************************************")  
+        # print(tag_ids)
+        if not tag_ids == []:
+            db.session.commit()
 
         post_id = data_post.id
         return redirect(f'/posts/{post_id}')
@@ -199,7 +196,8 @@ def post_edit_route(post_id):
         print("*****************************************")  
         print(tag_ids)
 
-        db.session.commit()
+        if not tag_ids == []:
+            db.session.commit()
 
         return redirect(f'/posts/{post_id}')
 
