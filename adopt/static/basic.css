@@ -1,0 +1,24 @@
+img{
+    width: 200px;
+    height: 200px;
+}
+.card {
+    border: 1px solid black;
+    width: 250px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin: 10px;
+    padding-bottom: 5px;
+}
+
+.card h4{
+    margin: 5px;
+}
+.card-holder{
+    display: flex;
+    flex-direction: row;
+    margin: 10px;
+    width: 100vw;
+}

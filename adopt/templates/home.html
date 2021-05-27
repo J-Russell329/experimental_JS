@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block title %}Home{% endblock %}{% block main %}
+<h1>Pets</h1>
+<div class="card-holder">
+{% if pets %}
+    {% for pet in pets %}
+        <div class="card">
+            <a href="/pets/{{pet.id}}"><h3>{{pet.name}}</h3></a>
+            <div>
+                <img src={{pet.photo_url}} alt="">
+            </div>
+            {{pet.notes}}
+            {% if pet.available %}
+            <h4>{{pet.name}} is avaliable</h4>
+            <a href="/pets/{{pet.id}}"><button>Adopt</button></a>
+            {% else %}
+            <h4> Sorry! I already have a family </h4>
+            {% endif %}
+
+        </div>
+    {% endfor %}
+{% else %}
+        <p>no pets are available</p>
+{% endif %}
+</div>
+<a href="/add"><button>Add New Pet</button></a>
+{% endblock %}
