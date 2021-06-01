@@ -1,5 +1,5 @@
 from flask import Flask, render_template, redirect, request, flash
-from models import db, connect_db,
+from models import db, connect_db
 from flask_debugtoolbar import DebugToolbarExtension
 
 

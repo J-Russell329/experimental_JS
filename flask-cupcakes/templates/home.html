@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Cupcakes!</title>
+		<link rel="stylesheet" href="/static/style.css" />
+	</head>
+	<body>
+		<main>
+			<div>
+				<form action="">
+					<div>
+						<label for="flavor">Flavor:</label>
+						<input
+							type="text"
+							name="flavor"
+							id="flavor"
+							placeholder="insert flavor"
+						/>
+					</div>
+					<div>
+						<label for="size">Size:</label>
+						<input
+							type="text"
+							name="size"
+							id="size"
+							placeholder="insert size"
+						/>
+					</div>
+					<div>
+						<label for="rating">Rating:</label>
+						<input
+							type="text"
+							name="rating"
+							id="rating"
+							placeholder="insert rating"
+						/>
+					</div>
+					<div>
+						<label for="image">Image:</label>
+						<input
+							type="text"
+							name="image"
+							id="image"
+							placeholder="optional: insert image"
+						/>
+					</div>
+					<button type="button" id="submit-cupcake">
+						Add Cupcake
+					</button>
+				</form>
+			</div>
+			<div id="cupcake-view"><p>loading........</p></div>
+		</main>
+		<script
+			src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"
+			integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ=="
+			crossorigin="anonymous"
+			referrerpolicy="no-referrer"
+		></script>
+		<script src="/static/app.js"></script>
+	</body>
+</html>

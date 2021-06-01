@@ -1,0 +1,42 @@
+main {
+	width: 70vw;
+}
+body {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+form {
+	display: flex;
+	flex-direction: column;
+}
+form div {
+	display: flex;
+	flex-direction: row;
+	align-items: flex-start;
+	margin-top: 10px;
+}
+div label,
+div input {
+	flex: 1;
+}
+/* div input{
+    border-radius: 2px;
+} */
+button {
+	margin: 15px;
+	border-radius: 5px;
+}
+
+img {
+	width: 200px;
+	height: 200px;
+}
+
+.head-div {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	text-align: center;
+}
