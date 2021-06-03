@@ -1,0 +1,30 @@
+nav {
+	display: flex;
+	flex-direction: row;
+	background-color: darkgray;
+	height: 40px;
+	align-items: center;
+}
+
+nav div {
+	margin-left: 5px;
+}
+
+.card {
+	border: 1px solid rgba(0, 0, 0, 0.2);
+	margin-top: 5px;
+	margin-bottom: 5px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+div {
+	text-align: center;
+}
+
+.flex-row {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}

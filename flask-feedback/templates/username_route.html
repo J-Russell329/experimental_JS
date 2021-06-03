@@ -1,0 +1,30 @@
+{% extends "base.html" %} {% block title %}{{user.username}}{% endblock %}{%
+block main %}
+<div>
+	<h1>{{user.username}}</h1>
+	<p>{{user.email}}</p>
+	<p>{{user.first_name}}</p>
+	<p>{{user.last_name}}</p>
+    {%if "username" in session and session["username"] == user.username %}
+    <form action="/users/{{user.username}}/delete" method="POST"><button>Delete Profile</button></form>
+    {% endif %}
+
+</div>
+<div><h3>FeedBack</h3></div>
+
+{% for feed in feedback %}
+<div class="card">
+	{%if "username" in session and session["username"] == user.username %}
+	<div class="flex-row">
+		<h2>{{feed.title}}</h2>
+		<a href="/feedback/{{feed.id}}/update"><button>Edit</button></a>
+        <form action="/feedback/{{feed.id}}/delete" method="POST"><button>Delete</button></a>
+	</div>
+	<p>{{feed.content}}</p>
+	{% else %}
+	<h2>{{feed.title}}</h2>
+	<p>{{feed.content}}</p>
+
+	{% endif %}
+</div>
+{% endfor %} {% endblock %}
