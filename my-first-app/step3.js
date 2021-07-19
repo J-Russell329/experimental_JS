@@ -5,7 +5,7 @@ let argv = process.argv[2];
 let toFile = process.argv[3];
 let fromFile = process.argv[4];
 
-if ((argv = '--out')) {
+if (argv === '--out') {
 	outFile(toFile, fromFile);
 } else {
 	if (String(argv).includes('http')) {
