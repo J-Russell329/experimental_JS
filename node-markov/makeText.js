@@ -1,4 +1,5 @@
 /** Command-line tool to generate Markov text. */
+//  node makeText.js "filetype ('url'/'file')" "source" "word count (default =100)"
 const fs = require('fs');
 const axios = require('axios');
 const { MarkovMachine } = require('./markov');
