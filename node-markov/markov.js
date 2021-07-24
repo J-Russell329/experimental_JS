@@ -15,23 +15,40 @@ class MarkovMachine {
 	 *  {"the": ["cat", "hat"], "cat": ["in"], "in": ["the"], "hat": [null]} */
 
 	makeChains() {
-		// console.log(this.words);
+		let chains = new Map();
+
+		for (let i = 0; i < this.words.length; i += 1) {
+			let word = this.words[i];
+			let nextWord = this.words[i + 1] || null;
+
+			if (chains.has(word)) chains.get(word).push(nextWord);
+			else chains.set(word, [nextWord]);
+		}
+
+		this.chains = chains;
+	}
+
+	/** Pick random choice from array */
+
+	static choice(ar) {
+		return ar[Math.floor(Math.random() * ar.length)];
 	}
 
 	/** return random text from chains */
 
 	makeText(numWords = 100) {
-		let returnText = this.words[this.randNum()] + ' ';
-		for (let i = 1; i < numWords - 1; i++) {
-			returnText = returnText + this.words[this.randNum()] + ' ';
-		}
-		returnText = returnText + this.words[this.randNum()];
-		return returnText;
-	}
+		// pick a random key to begin
+		let keys = Array.from(this.chains.keys());
+		let key = MarkovMachine.choice(keys);
+		let out = [];
 
-	randNum() {
-		// console.log(typeof Array(this.words));
-		return Math.floor(Math.random() * this.words.length);
+		// produce markov chain until reaching termination word
+		while (out.length < numWords && key !== null) {
+			out.push(key);
+			key = MarkovMachine.choice(this.chains.get(key));
+		}
+
+		return out.join(' ');
 	}
 }
 
