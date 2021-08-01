@@ -77,7 +77,9 @@ router.delete('/:id', async function (req, res, next) {
 			req.params.id,
 		]);
 		if (invoices.rowCount === 0) {
-			return res.status(404).json({ status: 'Whoops! Nothing here!' });
+			return res
+				.status(404)
+				.json({ status: 'Whoops! Nothing here to delete!' });
 		}
 		return res.json({ status: 'deleted' });
 	} catch {
