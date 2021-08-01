@@ -3,7 +3,7 @@
 const express = require('express');
 const companiesRouter = require('./routes/companiesRoute');
 const invoicesRouter = require('./routes/invoicesRoute');
-// const db = require('./db');
+const db = require('./db');
 
 const app = express();
 const ExpressError = require('./expressError');

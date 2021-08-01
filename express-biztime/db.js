@@ -2,18 +2,17 @@
 
 const { Client } = require('pg');
 
-let DB_URI;
+let dbName = 'biztime'; // change me
+
+//----------------this way worked on my machine---------------------
 
 if (process.env.NODE_ENV === 'test') {
-	DB_URI = 'postgresql:///biztime_test';
-} else {
-	DB_URI = 'postgresql:///biztime';
+	dbName = `${dbName}_test`;
 }
-// console.log(DB_URI);
 
 let db = new Client({
 	host: '/var/run/postgresql',
-	database: 'biztime',
+	database: dbName,
 	password: '',
 	port: 5432,
 });

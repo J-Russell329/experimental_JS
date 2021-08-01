@@ -2,7 +2,8 @@ process.env.NODE_ENV = 'test'; // "changes the env to test. makes it easy to swi
 
 const request = require('supertest');
 
-const app = require('./app');
+const app = require('../app');
+const db = require('../db');
 
 beforeEach(function () {
 	// "runs before each test "
@@ -14,6 +15,7 @@ afterEach(function () {
 
 afterAll(function () {
 	// "runs after all test have been ran"
+	await db.end(); //ends the db connection
 });
 
 describe('GET /', function () {

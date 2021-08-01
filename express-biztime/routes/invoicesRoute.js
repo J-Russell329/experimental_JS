@@ -39,7 +39,6 @@ router.get('/:id', async function (req, res, next) {
 	try {
 		let id = req.params.id;
 		invoices = await db.query(`select * from invoices where id=$1`, [id]);
-		// console.log(invoices);
 		if (invoices.rowCount === 0) {
 			return res.status(404).json({ status: 'Whoops! Nothing here!' });
 		}
@@ -55,7 +54,6 @@ router.put('/:id', async function (req, res, next) {
 		let amt = req.body.amt;
 		let paid = req.body.paid;
 		let paid_date = req.body.paid_date;
-		console.log(comp_code, amt, paid, paid_date);
 
 		invoices = await db.query(
 			`UPDATE invoices SET comp_code=$1, amt=$2, paid=$3,
