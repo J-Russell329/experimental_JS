@@ -45,6 +45,11 @@ class Company {
 	 * */
 
 	static async findAll(data) {
+		// had to place this line in so that it can be ran with or without included data
+		if (!data) {
+			data = {};
+		}
+
 		if (JSON.stringify(data) !== JSON.stringify({})) {
 			const { setCols, values } = sqlForSeaches(data, {
 				numEmployees: 'num_employees',
@@ -119,6 +124,7 @@ class Company {
 		const { setCols, values } = sqlForPartialUpdate(data, {
 			numEmployees: 'num_employees',
 			name: 'name',
+			logoUrl: 'logo_url',
 		});
 		const handleVarIdx = '$' + (values.length + 1);
 

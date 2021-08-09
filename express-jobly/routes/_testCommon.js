@@ -34,13 +34,13 @@ async function commonBeforeAll() {
 		logoUrl: 'http://c3.img',
 	});
 
-	let j1 = await Jobs.create({
+	await Jobs.create({
 		title: 'j1',
 		salary: 11000,
 		equity: 0,
 		companyHandle: 'c1',
 	});
-	let j2 = await Jobs.create({
+	await Jobs.create({
 		title: 'j2',
 		salary: 22000,
 		equity: 0,

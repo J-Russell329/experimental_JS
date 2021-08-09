@@ -64,7 +64,6 @@ describe('POST /jobs', function () {
 				companyHandle: 'c',
 			})
 			.set('authorization', `Bearer ${u1Token}`);
-		// console.log(resp);
 		expect(resp.statusCode).toEqual(500);
 	});
 });

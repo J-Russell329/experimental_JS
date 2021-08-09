@@ -154,7 +154,6 @@ router.post(
 				return values;
 			});
 			const application = await User.jobApply(username, jobID);
-			console.log(application);
 			if (application === 1) {
 				throw new BadRequestError(
 					`whoops, had some issues applying for this possition. Please check to see if you have already applied for this position`

@@ -136,7 +136,6 @@ describe('GET /companies', function () {
 		const resp = await request(app)
 			.get('/companies')
 			.query({ minEmployees: 2, maxEmployees: 2 });
-		console.log(resp.body);
 		expect(resp.body).toEqual({
 			companies: [
 				{
@@ -227,7 +226,7 @@ describe('PATCH /companies/:handle', function () {
 
 	test('not found on no such company', async function () {
 		const resp = await request(app)
-			.patch(`/companies/nope`)
+			.patch(`/companies/nothing`)
 			.send({
 				name: 'new nope',
 			})
