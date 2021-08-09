@@ -6,8 +6,9 @@ const jsonschema = require('jsonschema');
 
 const express = require('express');
 const { authenticateJWT, ensureLoggedIn } = require('../middleware/auth');
-const { BadRequestError } = require('../expressError');
+const { BadRequestError, ExpressError } = require('../expressError');
 const User = require('../models/user');
+const Jobs = require('../models/jobs');
 const { createToken } = require('../helpers/tokens');
 const userNewSchema = require('../schemas/userNew.json');
 const userUpdateSchema = require('../schemas/userUpdate.json');
@@ -26,21 +27,31 @@ const router = express.Router();
  * Authorization required: login
  **/
 
-router.post('/', ensureLoggedIn, async function (req, res, next) {
-	try {
-		const validator = jsonschema.validate(req.body, userNewSchema);
-		if (!validator.valid) {
-			const errs = validator.errors.map((e) => e.stack);
-			throw new BadRequestError(errs);
-		}
+router.post(
+	'/',
+	authenticateJWT,
+	ensureLoggedIn,
+	async function (req, res, next) {
+		try {
+			if (res.locals.user.isAdmin !== true) {
+				return next(
+					new ExpressError('must be an authorized admin', 401)
+				);
+			}
+			const validator = jsonschema.validate(req.body, userNewSchema);
+			if (!validator.valid) {
+				const errs = validator.errors.map((e) => e.stack);
+				throw new BadRequestError(errs);
+			}
 
-		const user = await User.register(req.body);
-		const token = createToken(user);
-		return res.status(201).json({ user, token });
-	} catch (err) {
-		return next(err);
+			const user = await User.register(req.body);
+			const token = createToken(user);
+			return res.status(201).json({ user, token });
+		} catch (err) {
+			return next(err);
+		}
 	}
-});
+);
 
 /** GET / => { users: [ {username, firstName, lastName, email }, ... ] }
  *
@@ -117,5 +128,44 @@ router.delete('/:username', ensureLoggedIn, async function (req, res, next) {
 		return next(err);
 	}
 });
+/** Adds join table for jobs and potential applicants (just their username)
+ *
+ * Authorization required: login
+ *
+ * SIDE NOTE:
+ * should probably just grab the username from the JWT. This would save some hassle
+ * and not allow others to apply on anothers behalf
+ **/
+router.post(
+	'/:username/jobs/:jobID',
+	authenticateJWT,
+	ensureLoggedIn,
+	async function (req, res, next) {
+		try {
+			let { username, jobID } = req.params;
+			jobID = Number(jobID);
+			if (typeof username !== 'string' || !jobID > 0) {
+				throw new BadRequestError(
+					'username must be a string and jobID must be a number'
+				);
+			}
+			const getData = [User.get(username), Jobs.get(jobID)];
+			let dataValues = await Promise.all(getData).then((values) => {
+				return values;
+			});
+			const application = await User.jobApply(username, jobID);
+			console.log(application);
+			if (application === 1) {
+				throw new BadRequestError(
+					`whoops, had some issues applying for this possition. Please check to see if you have already applied for this position`
+				);
+			}
+
+			return res.json({ applied: jobID });
+		} catch (err) {
+			next(err);
+		}
+	}
+);
 
 module.exports = router;

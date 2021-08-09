@@ -13,7 +13,6 @@
 			"companyHandle": "hall-mills"
 		}
 	],
-	"required": ["title", "salary", "equity", "companyHandle"],
 	"properties": {
 		"title": {
 			"$id": "#/properties/title",
