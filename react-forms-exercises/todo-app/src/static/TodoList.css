@@ -1,0 +1,16 @@
+.todo-item {
+	width: 75%;
+	display: flex;
+	flex-direction: row;
+}
+.todo-text {
+	flex: auto;
+	border-top: black 1px solid;
+	border-left: black 1px solid;
+	border-bottom: black 1px solid;
+}
+.delete {
+	border: black 1px solid;
+
+	width: 20px;
+}
