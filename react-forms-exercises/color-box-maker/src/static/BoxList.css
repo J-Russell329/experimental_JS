@@ -1,0 +1,9 @@
+#box-list {
+	position: absolute;
+	bottom: 0px;
+	height: 75vh;
+	width: 100vw;
+	background-color: white;
+	border: 5px solid black;
+	box-sizing: border-box;
+}

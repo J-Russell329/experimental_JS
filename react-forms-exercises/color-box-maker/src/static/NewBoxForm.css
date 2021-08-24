@@ -1,0 +1,15 @@
+form {
+	position: absolute;
+	top: 10px;
+	display: flex;
+	flex-direction: column;
+}
+
+form div {
+	display: flex;
+	flex-direction: row;
+}
+
+label {
+	margin-right: 20px;
+}
