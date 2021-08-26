@@ -40,7 +40,6 @@ function Board({ nrows = 5, ncols = 5, chanceLightStartsOn = 0.25 }) {
 			}
 			initialBoard.push(row);
 		}
-		// console.log(initialBoard);
 		return initialBoard;
 	}
 
