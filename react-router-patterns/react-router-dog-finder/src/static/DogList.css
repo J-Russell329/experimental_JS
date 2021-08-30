@@ -1,0 +1,13 @@
+.dog-card {
+	border: black 1px solid;
+	display: flex;
+	flex-direction: row;
+	width: 75vw;
+	align-items: center;
+}
+
+img {
+	margin-left: 10px;
+	max-height: 220px;
+	max-width: 150px;
+}

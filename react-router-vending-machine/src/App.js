@@ -16,13 +16,11 @@ function App() {
 				<BrowserRouter>
 					<nav>
 						<div>
-							{' '}
 							<NavLink exact to="/" activeStyle={ACTIVE_STYLES}>
 								Vending Machine
 							</NavLink>
 						</div>
 						<div>
-							{' '}
 							<NavLink
 								exact
 								to="/soda"
@@ -43,7 +41,6 @@ function App() {
 						</div>
 
 						<div>
-							{' '}
 							<NavLink
 								exact
 								to="/sardines"
