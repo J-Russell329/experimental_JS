@@ -1,0 +1,33 @@
+nav {
+	position: relative;
+	top: 0px;
+	background-color: #334257;
+	width: 100%;
+	color: white;
+	display: flex;
+	flex-direction: row;
+}
+
+nav div {
+	margin-left: 5px;
+	margin-right: 5px;
+}
+
+nav a {
+	color: white;
+}
+
+.homeNav {
+	text-align: left;
+	flex: 2;
+}
+
+.auxNavLinks {
+	display: flex;
+	flex-direction: row;
+	flex: 1;
+}
+.auxNavLinks div {
+	text-align: center;
+	flex: 1;
+}
