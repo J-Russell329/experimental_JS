@@ -6,7 +6,10 @@ function useForm(intial = '') {
 	function updateValue(e) {
 		setState(e.target.value);
 	}
-	return [state, updateValue];
+	function setValue(value) {
+		setState(value);
+	}
+	return [state, updateValue, setValue];
 }
 
 export default useForm;

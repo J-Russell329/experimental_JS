@@ -1,5 +1,3 @@
-'use strict';
-
 /** Shared config for application; can be required many places. */
 
 const SECRET_KEY = 'secret-dev';

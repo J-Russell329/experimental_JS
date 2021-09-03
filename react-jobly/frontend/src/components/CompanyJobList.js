@@ -4,13 +4,12 @@ import JoblyApi from '../helpers/api';
 import { useParams } from 'react-router-dom';
 import List from './List';
 
-function CompanyJobList() {
+function CompanyJobList({ jobApply }) {
 	const [company, setCompany] = useState();
 	const { handle } = useParams();
 
 	useEffect(() => {
 		JoblyApi.getCompany(handle).then((value) => {
-			// console.log(value);
 			setCompany(value);
 		});
 	}, [handle]);
@@ -25,7 +24,11 @@ function CompanyJobList() {
 						<p>{company.description}</p>
 					</div>
 
-					<List listName="company jobs" compJobs={company.jobs} />
+					<List
+						listName="company jobs"
+						jobApply={jobApply}
+						compJobs={company.jobs}
+					/>
 				</>
 			) : (
 				<div>there are no jobs posted right now</div>

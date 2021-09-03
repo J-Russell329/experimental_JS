@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import '../static/List.css';
+import UserContext from './UserContext';
 
-function JobItem({ job }) {
+function JobItem({ job, jobApply }) {
+	const context = useContext(UserContext);
 	const { id, equity, salary, title } = job;
 	return (
 		<div key={id} className="list job">
@@ -17,7 +19,12 @@ function JobItem({ job }) {
 				<p>Equity: {equity ? equity : 0}</p>
 			</div>
 			{/* ------------------------------------------------------needs to be implimented */}
-			<button>applies to job</button>
+			{context.appliedJobs.has(id) ? (
+				<button style={{ backgroundColor: '#548ca8' }}>applied</button>
+			) : (
+				<button onClick={() => jobApply(id)}>applies to job</button>
+			)}
+			{/* <button onClick={() => jobApply(id)}>applies to job</button> */}
 		</div>
 	);
 }

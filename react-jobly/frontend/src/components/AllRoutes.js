@@ -4,9 +4,10 @@ import CompanyJobList from './CompanyJobList';
 import Home from './Home';
 import List from './List';
 import Login from './Login';
+import Profile from './Profile';
 import SignUp from './SignUp';
 
-function AllRoutes({ registerUser }) {
+function AllRoutes({ registerUser, loginUser, jobApply, updateUserData }) {
 	return (
 		<Switch>
 			<Route exact path="/">
@@ -16,19 +17,19 @@ function AllRoutes({ registerUser }) {
 				<SignUp registerUser={registerUser} />
 			</Route>
 			<Route exact path="/login">
-				<Login />
+				<Login loginUser={loginUser} />
+			</Route>
+			<Route exact path="/profile">
+				<Profile updateUserData={updateUserData} />
 			</Route>
 			<Route exact path="/companies">
 				<List listName="companies" />
 			</Route>
 			<Route exact path="/jobs">
-				<List listName="jobs" />
+				<List listName="jobs" jobApply={jobApply} />
 			</Route>
 			<Route exact path="/companies/:handle">
-				<CompanyJobList />
-			</Route>
-			<Route exact path="/jobs:handle">
-				<div>path to jobs / handle</div>
+				<CompanyJobList jobApply={jobApply} />
 			</Route>
 			<Redirect to="/" />
 		</Switch>

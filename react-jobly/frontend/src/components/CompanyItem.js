@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 
 function CompanyItem({ company }) {
 	const { handle, name, numEmployees, description } = company;
-	// console.log(company);
 	return (
 		<Link key={handle} to={`/companies/${handle}`} className="card-link">
 			<div className="list company">
@@ -12,9 +11,6 @@ function CompanyItem({ company }) {
 					<div className="list-upper-title">
 						<h3>{name}</h3>
 					</div>
-					{/* <div className="list-upper-img"> */}
-					{/* <img src={logoUrl}></img> */}
-					{/* </div> */}
 				</div>
 				<div>
 					<p>Number of Employees: {numEmployees}</p>
