@@ -8,6 +8,7 @@ let db;
 if (process.env.NODE_ENV === 'production') {
 	db = new Client({
 		host: '/var/run/postgresql',
+		connectionString: getDatabaseName(),
 		database: getDatabaseName(),
 		password: '',
 		port: 5432,
